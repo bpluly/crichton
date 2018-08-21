@@ -12,18 +12,22 @@ Set up for development:
     Start MySQL.
     Make sure python is >=2.4.3.
     Install python-devel.
+        If you have bbc python (like on sandbox), yum is confused about what to install,
+        and things are pretty messed up. You should follow
+          https://confluence.dev.domain.com/display/socom/crichton+on+the+sandbox
+        to work around that.
     Install dependencies for the mysql module for python:
         yum install python-devel mysql-devel zlib-devel openssl-devel
     Install dependencies from ../vendor. (see ../vendor/README.txt).
     Follow crichtonweb/README.txt to get that up and running.
     
     To get SSL support working:
-        Install httpd.
+        Install standard/base forge httpd.
         Follow puppet-snippets/README.txt.
 
 Set up on server:
-    Upgrade to latest patched CENTOS 7.
-    Install httpd.
+    Upgrade to latest patched RHEL 5.
+    Install standard/base forge httpd.
     Create a server cert at
         /etc/crichton.dev.domain.com.{key,pem}
         (unless you are on the sandbox).
