@@ -20,7 +20,7 @@
 from django.contrib.auth.middleware import RemoteUserMiddleware
 import sys
 
-class CrichtonRemoteUserMiddleware(RemoteUserMiddleware):
+class BBCRemoteUserMiddleware(RemoteUserMiddleware):
     def __init__(self):
         self.header = 'HTTP_SSLCLIENTCERTSUBJECT'
 

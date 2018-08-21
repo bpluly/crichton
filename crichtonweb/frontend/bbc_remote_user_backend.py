@@ -22,14 +22,14 @@ from pdb import set_trace
 import re
 import sys
 
-class CrichtonRemoteUserBackend(RemoteUserBackend):
+class BBCRemoteUserBackend(RemoteUserBackend):
     """ Subclasses the standard backend to extract the user name from the certificate header
       it is enabled by adding it into the settings file as 
       AUTHENTICATION_BACKENDS = (
-          'CrichtonRemoteUserBackend',
+          'BBCRemoteUserBackend',
       )
       
-      The HTTP_REMOTE_USER should be overridden as in crichton_remote_user_backend.py
+      The HTTP_REMOTE_USER should be overridden as in bbc_remote_user_backend.py
       its just too easy to spoof.  A good implementation would clean all the SSL
       headers before populating them with the current request so they can't be 
       spoofed.
