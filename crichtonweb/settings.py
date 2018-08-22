@@ -15,7 +15,7 @@
 #
 #
 # Django settings for crichtonweb project.
-#### PRODUCTION SETTINGS ####
+#### EXAMPLE SETTINGS ####
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -77,6 +77,7 @@ MEDIA_URL = ''
 ADMIN_MEDIA_PREFIX = '/media/'
 
 # Make this unique, and don't share it with anybody.
+# NOT A
 SECRET_KEY = 'd}oFpZ6H\@a3iGLt/[6ZvV.sMMeVtZ0'
 
 # List of callables that know how to import templates from various sources.
@@ -92,8 +93,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 #
-#    BBCRemoteUserMiddleware subclasses 'django.contrib.auth.middleware.RemoteUserMiddleware'
-    'crichtonweb.frontend.bbc_remote_user_middleware.BBCRemoteUserMiddleware',
+    CrichtonRemoteUserMiddleware subclasses 'django.contrib.auth.middleware.RemoteUserMiddleware'
+    'crichtonweb.frontend.crichton_remote_user_middleware.CrichtonRemoteUserMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
     'audit_log.middleware.UserLoggingMiddleware'
@@ -142,9 +143,9 @@ INSTALLED_APPS = API_EXPOSED_APPS + (
 
 AUTH_PROFILE_MODULE = "api.person"
 
-# BBCRemoteUserBackend subclasses django.contrib.auth.backends.RemoteUserBackend
+# CrichtonRemoteUserBackend subclasses django.contrib.auth.backends.RemoteUserBackend
 AUTHENTICATION_BACKENDS = (
-    'frontend.bbc_remote_user_backend.BBCRemoteUserBackend',
+    'frontend.crichton_remote_user_backend.CrichtonRemoteUserBackend',
 )
 
 # AUTH_CONFIG is read and applied by the applyauthconfig.py script
@@ -157,28 +158,10 @@ AUTH_CONFIG = {
     ],
     "superusers": [
         {
-            "username":   "Dave.van.Zijl",
-            "email":      "Dave.van.Zijl@domain.local",
-            "first_name": "Dave",
-            "last_name":  "van Zijl",
-        },
-        {
-            "username":   "Leo.Simons",
-            "email":      "Leo.Simons@domain.local",
-            "first_name": "Leo",
-            "last_name":  "Simons",
-        },
-        {
-            "username":   "Rachel.Willmer",
-            "email":      "Rachel.Willmer@domain.local",
-            "first_name": "Rachel",
-            "last_name":  "Willmer",
-        },
-        {
-            "username":   "Simon.Lucy",
-            "email":      "Simon.Lucy@domain.local",
-            "first_name": "Simon",
-            "last_name":  "Lucy",
+            "username":   "super.user",
+            "email":      "super.user@domain.local",
+            "first_name": "Super",
+            "last_name":  "User",
         },
     ],
     "group_permissions": [
@@ -241,6 +224,7 @@ SERIALIZATION_MODULES = {
     "json_ext" : "hotjazz.json_serializer_ext",
 }
 
+# Example certs and keys
 SSL_CERT_FILE = '/etc/pki/crichton.pem'
 SSL_KEY_FILE = '/etc/pki/crichton.pem'
 CA_CERT_FILE = '/etc/ca.pem'
@@ -254,7 +238,7 @@ USE_TEST_JIRA_HOST = True
 
 from socket import gethostname
 hostname=gethostname()
-if hostname in ["scom001.back.live.cwwtf.local", "scom101.back.live.telhc.local"]:
+if hostname in ["jira.back.live.dc01.local", "jira.back.live.dc02.local"]:
     USE_TEST_JIRA_PROJECT = False
     USE_TEST_JIRA_HOST = False
 
@@ -263,18 +247,18 @@ if USE_TEST_JIRA_PROJECT:
 else:
     OPS_PROJECT_NAME = "OPS"
 if USE_TEST_JIRA_HOST:
-    JIRA_NAME = "forge-jira-test"
+    JIRA_NAME = "jira-test"
     JIRA_BASE_URL = 'https://jira-test.dev.domain.com:443/'
 else:
-    JIRA_NAME = "forge-jira"
+    JIRA_NAME = "jira"
     JIRA_BASE_URL = 'https://jira.dev.domain.com:443/'
 
-# Jira passwords are normally random 32 character strings. The password below only works
-# on the jira-test instance. On production, this value will come from local_settings.py
+# Jira passwords are normally random 32 character strings. On production, this value will come from local_settings.py
 # which is placed on the server by puppet.
 JIRA_USER = 'crichton'
-JIRA_PASS = 'AspidistraPie'
+JIRA_PASS = 'YouNeverKnow'
 
+# This is unlikely to work on Jira Cloud
 JIRA_SOAP_ROOT = JIRA_BASE_URL + 'rpc/soap/jirasoapservice-v2?wsdl'
 JIRA_REST_ROOT = JIRA_BASE_URL + 'rest/api/2.0.alpha1/'
 

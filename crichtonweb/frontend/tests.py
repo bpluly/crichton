@@ -17,12 +17,12 @@
 from django.test import TestCase
 from django.utils import unittest
 
-from frontend import BBCRemoteUserBackend
+from frontend import CrichtonRemoteUserBackend
 
 class FrontendTestCase(TestCase):
 
     def test_parse_cert(self):
-        backend = BBCRemoteUserBackend()
+        backend = CrichtonRemoteUserBackend()
         username = backend.clean_username("Email=john.doe@domain.local,CN=John Doe,OU=BBC - FMT - Online Media Group,O=British Broadcasting Corporation,L=London,C=GB")
         self.assertEqual(username, "John.Doe")
         self.assertEqual(backend.email, "john.doe@domain.local")
@@ -30,13 +30,13 @@ class FrontendTestCase(TestCase):
         self.assertEqual(backend.last_name, "Doe")
 
     def test_parse_cert_no_last_name(self):
-        backend = BBCRemoteUserBackend()
+        backend = CrichtonRemoteUserBackend()
         backend.clean_username("Email=john.doe@domain.local,CN=John,OU=BBC - FMT - Online Media Group,O=British Broadcasting Corporation,L=London,C=GB")
         self.assertEqual(backend.first_name, "John")
         self.assertEqual(backend.last_name, "")
 
     def test_parse_cert_complex_last_name(self):
-        backend = BBCRemoteUserBackend()
+        backend = CrichtonRemoteUserBackend()
         backend.clean_username("Email=john.doe@domain.local,CN=John long Last-Name,OU=BBC - FMT - Online Media Group,O=British Broadcasting Corporation,L=London,C=GB")
         self.assertEqual(backend.first_name, "John")
         self.assertEqual(backend.last_name, "long Last-Name")

@@ -14,7 +14,7 @@
 #  limitations under the License.
 #
 #
-from bbc_remote_user_middleware import BBCRemoteUserMiddleware
-from bbc_remote_user_backend import BBCRemoteUserBackend
+from crichton_remote_user_middleware import CrichtonRemoteUserMiddleware
+from crichton_remote_user_backend import CrichtonRemoteUserBackend
 
 # eof

@@ -46,7 +46,7 @@ sys.path.append(crichtoncli_dir)
 
 new_mw = []
 for mw in MIDDLEWARE_CLASSES:
-    if mw.endswith('BBCRemoteUserMiddleware'):
+    if mw.endswith('CrichtonRemoteUserMiddleware'):
         continue
     new_mw.extend(mw)
 MIDLEWARE_CLASSES=tuple(new_mw)
